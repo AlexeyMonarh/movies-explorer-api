@@ -1,10 +1,10 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const { errors } = require('celebrate');
-const { limiter, PORT, mongoConnect } = require('./config/index');
+const { limiter, MONGODB_URL, PORT } = require('./config/index');
 
 const router = require('./routers');
 const errorHandler = require('./middlewares/errorHandler');
@@ -15,14 +15,14 @@ const app = express();
 app.use(requestLogger);
 app.use(cors());
 app.use(limiter);
-mongoose.connect(mongoConnect, {
+mongoose.connect(MONGODB_URL, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
 });
 app.use(helmet());
-app.use(bodyParser.json());
+app.use(express.json());
 app.use('/', router);
 
 app.use(errorLogger);

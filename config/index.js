@@ -1,11 +1,11 @@
 const rateLimit = require('express-rate-limit');
 
-const { PORT = 3000 } = process.env;
+const { PORT } = process.env;
 
-const { mongoConnect = 'mongodb://localhost:27017/bitfilmsdb' } = process.env;
+const { MONGODB_URL } = process.env;
 
-const JWT_SECRET = process.env.JWT_SECRET || 'default secret';
-const JWT_TTL = process.env.JWT_SECRET || '7d';
+const { JWT_SECRET } = process.env;
+const { JWT_TTL } = process.env;
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -14,7 +14,7 @@ const limiter = rateLimit({
 
 module.exports = {
   PORT,
-  mongoConnect,
+  MONGODB_URL,
   JWT_SECRET,
   JWT_TTL,
   limiter,
