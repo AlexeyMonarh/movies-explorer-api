@@ -15,13 +15,11 @@ const createUser = (req, res, next) => {
       }
       return bcrypt.hash(password, 10);
     })
-    .then((hash) => {
-      User.create({
-        name,
-        email,
-        password: hash,
-      });
-    })
+    .then((hash) => User.create({
+      name,
+      email,
+      password: hash,
+    }))
     // eslint-disable-next-line no-shadow
     .then(({ name, email }) => {
       res.send({
