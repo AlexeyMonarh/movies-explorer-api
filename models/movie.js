@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const { ObjectId } = mongoose.Types.ObjectId;
 const validator = require('validator');
-const notValidUrl = require('../config/constants');
+const { notValidUrl } = require('../config/constants');
 
 const movieSchema = new mongoose.Schema(
   {

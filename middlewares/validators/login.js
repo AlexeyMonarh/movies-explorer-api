@@ -2,8 +2,8 @@ const { celebrate, Joi } = require('celebrate');
 const validator = require('validator');
 const {
   notValidEmail,
-  min,
-  max,
+  minSymbol,
+  maxSymbol,
   requiredField,
 } = require('../../config/constants');
 
@@ -20,8 +20,8 @@ const login = celebrate({
       .messages({ 'any.required': requiredField }),
     password: Joi.string().min(2).max(30).required()
       .messages({
-        'string.min': min,
-        'string.max': max,
+        'string.min': minSymbol,
+        'string.max': maxSymbol,
         'any.required': requiredField,
       }),
   },

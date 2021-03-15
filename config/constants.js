@@ -15,11 +15,11 @@ const unauthorized = 'Нет токена!';
 const notValidUrl = 'Не валидный Url!';
 const notValidEmail = 'Не валидный Email!';
 
-const min = 'Минимум 2 символа';
-const max = 'Максимум 30 символов';
+const minSymbol = 'Минимум 2 символа';
+const maxSymbol = 'Максимум 30 символов';
 const requiredField = 'Обязательное поле';
-const length = 'Длина 24 символа';
-const hex = 'Не соответствует системе исчисления';
+const lengthSymbol = 'Длина 24 символа';
+const hexSystem = 'Не соответствует системе исчисления';
 
 module.exports = {
   movieNotDelete,
@@ -33,9 +33,9 @@ module.exports = {
   unauthorized,
   notValidUrl,
   notValidEmail,
-  min,
-  max,
+  minSymbol,
+  maxSymbol,
   requiredField,
-  length,
-  hex,
+  lengthSymbol,
+  hexSystem,
 };
