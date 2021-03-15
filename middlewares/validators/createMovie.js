@@ -1,5 +1,6 @@
 const { celebrate, Joi } = require('celebrate');
 const validator = require('validator');
+const { notValidUrl } = require('../../config/constants');
 
 const createMovie = celebrate({
   body: {
@@ -12,19 +13,19 @@ const createMovie = celebrate({
       if (validator.isURL(value)) {
         return value;
       }
-      return helper.message('Невалидный URL');
+      return helper.message(notValidUrl);
     }),
     trailer: Joi.string().required().custom((value, helper) => {
       if (validator.isURL(value)) {
         return value;
       }
-      return helper.message('Невалидный URL');
+      return helper.message(notValidUrl);
     }),
     thumbnail: Joi.string().required().custom((value, helper) => {
       if (validator.isURL(value)) {
         return value;
       }
-      return helper.message('Невалидный URL');
+      return helper.message(notValidUrl);
     }),
     movieId: Joi.number().required(),
     nameRU: Joi.string().required(),

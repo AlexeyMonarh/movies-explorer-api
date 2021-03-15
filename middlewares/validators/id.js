@@ -1,16 +1,12 @@
 const { celebrate, Joi } = require('celebrate');
+const { length, hex } = require('../../config/constants');
 
 const id = celebrate({
   params: {
-    _id: Joi.string()
-      .required()
-      .min(2)
-      .max(30)
-      .hex()
+    _id: Joi.string().required().length(24).hex()
       .messages({
-        'string.min': 'Минимум 2 символа',
-        'string.max': 'Максимум 30 символов',
-        'string.hex': 'Не соответствует системе исчисления',
+        'string.length': length,
+        'string.hex': hex,
       }),
   },
 });

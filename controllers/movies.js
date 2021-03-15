@@ -1,12 +1,17 @@
-const mongoose = require('mongoose');
 const Movie = require('../models/movie');
 const { NotFound, Forbidden } = require('../errors');
+const {
+  movieNotDelete,
+  movieNotFound,
+  movieRemove,
+  moviesNotFound,
+} = require('../config/constants');
 
 const getMovies = (req, res, next) => {
   Movie.find({})
     .then((Movies) => {
       if (!Movies.length) {
-        throw new NotFound('Нет Фильмов!');
+        throw new NotFound(moviesNotFound);
       }
       return res.send(Movies);
     })
@@ -50,21 +55,16 @@ const deleteMovie = (req, res, next) => {
   Movie.findById(req.params._id)
     .then((movie) => {
       if (!movie) {
-        throw new NotFound('Фильм не найден!');
+        throw new NotFound(movieNotFound);
       }
       if (String(movie.owner) !== String(req.user._id)) {
-        throw new Forbidden('Фильм не удален! Вы его не создавали!');
+        throw new Forbidden(movieNotDelete);
       }
       return movie.remove(movie._id).then(() => {
-        res.send({ message: 'Фильм удален!' });
+        res.send({ message: movieRemove });
       });
     })
-    .catch((err) => {
-      if (err instanceof mongoose.CastError) {
-        res.status(400).send({ message: 'Невалидный ID' });
-      }
-      next(err);
-    });
+    .catch(next);
 };
 
 module.exports = {
